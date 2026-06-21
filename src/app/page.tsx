@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Shield,
   Users,
@@ -19,7 +20,9 @@ import { PatternDivider } from "@/components/PatternDivider";
 import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { HeroMark } from "@/components/HeroMark";
 import { SectionHeading } from "@/components/SectionHeading";
+import { LeadershipSection } from "@/components/LeadershipSection";
 import { NEWS_ITEMS, ARTICLE_ITEMS, EVENT_ITEMS, STATS } from "@/lib/placeholder-data";
+import { LEADERS } from "@/lib/leaders-data";
 import { cn } from "@/lib/utils";
 
 const TONE_CLASSES = {
@@ -75,28 +78,46 @@ export default function HomePage() {
         <HeroMark className="pointer-events-none absolute -right-24 -top-24 h-[28rem] w-[28rem] sm:-right-16 sm:top-[-8rem]" />
 
         <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
-          <Reveal>
-            <span className="inline-flex items-center rounded-full bg-gold/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold">
-              Iwhuruohna First Movement
-            </span>
-            <h1 className="mt-6 max-w-2xl font-heading text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Uniting, preserving, and projecting{" "}
-              <span className="no-break text-brand-green">Iwhuruohna</span>{" "}
-              identity —{" "}for generations to come.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              A digital home for the Iwhuruohna (Ikwerre) people of Rivers
-              State, Nigeria — wherever they are in the world.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Button asChild size="lg" variant="primary">
-                <Link href="/about">Learn About the Movement</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/history">Explore Our History</Link>
-              </Button>
-            </div>
-          </Reveal>
+          <div className="flex flex-col items-start gap-12 lg:flex-row lg:items-center lg:justify-between">
+            <Reveal className="max-w-2xl">
+              <span className="inline-flex items-center rounded-full bg-gold/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold">
+                Iwhuruohna First Movement
+              </span>
+              <h1 className="mt-6 font-heading text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+                Uniting, preserving, and projecting{" "}
+                <span className="no-break text-brand-green">Iwhuruohna</span>{" "}
+                identity —{" "}for generations to come.
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                A digital home for the Iwhuruohna (Ikwerre) people of Rivers
+                State, Nigeria — wherever they are in the world.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Button asChild size="lg" variant="primary">
+                  <Link href="/about">Learn About the Movement</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/history">Explore Our History</Link>
+                </Button>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15} className="self-center lg:shrink-0 lg:self-auto">
+              <div className="relative h-48 w-48 overflow-hidden rounded-3xl border-4 border-surface shadow-xl ring-1 ring-brand-green/20 sm:h-56 sm:w-56 lg:h-64 lg:w-64">
+                <Image
+                  src={LEADERS[0].photo}
+                  alt={LEADERS[0].photoAlt}
+                  fill
+                  sizes="(min-width: 1024px) 256px, (min-width: 640px) 224px, 192px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <p className="mt-3 text-center text-xs font-medium text-muted-foreground sm:text-sm">
+                {LEADERS[0].name} <span className="text-border">·</span> {LEADERS[0].title}
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -155,6 +176,11 @@ export default function HomePage() {
             </Link>
           </Reveal>
         </div>
+      </section>
+
+      {/* 2b. Leadership */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <LeadershipSection />
       </section>
 
       <PatternDivider className="mx-auto max-w-6xl px-4 sm:px-6" />

@@ -267,7 +267,7 @@ Add the same variables in **Vercel → Project → Settings → Environment Vari
 - [ ] **Mission statement** + short "Who We Are" paragraph
 - [ ] **History** content for the flagship page (rough notes are fine)
 - [ ] **Photos** cleared for use (events, culture, people)
-- [ ] **Leadership** details to display publicly
+- [x] **Leadership** — first leader live: Emeka Ihruoha, IFM Supreme Leader (`public/images/leader.jpg`, `src/lib/leaders-data.ts`). Shown in the Home hero, a homepage Leadership section, and reused inside the About page's Leadership tab via `LeadershipSection`/`LeaderCard`. Each leader has a placeholder for a short message/quote until supplied — more leaders can be added by extending the `LEADERS` array.
 - [ ] **Social links** (Facebook page, Instagram, YouTube)
 - [ ] Number of **admins** needing login access
 

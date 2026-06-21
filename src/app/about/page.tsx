@@ -2,31 +2,11 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/Reveal";
 import { PatternDivider } from "@/components/PatternDivider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LeadershipSection } from "@/components/LeadershipSection";
 
 export const metadata: Metadata = {
   title: "About",
 };
-
-const SECTIONS = [
-  {
-    value: "mission",
-    label: "Mission",
-    heading: "Why IFM exists",
-    body: "IFM is a socio-cultural and nationalist movement for the Iwhuruohna people — built to unite our community, preserve our history and language, inform members of movement updates, amplify the voices of our people, and project our identity to the world.",
-  },
-  {
-    value: "philosophy",
-    label: "Philosophy",
-    heading: "Iwhuruohna First",
-    body: "We reject political tokenism. \"Iwhuruohna First\" means our people's interests, dignity, and development come before any party or politician's convenience — and it means building real industry and opportunity at home, not waiting for it.",
-  },
-  {
-    value: "leadership",
-    label: "Leadership",
-    heading: "Who leads the movement",
-    body: "IFM is guided by a small council of trusted community leaders. Full leadership profiles are coming soon as the movement's public presence grows.",
-  },
-] as const;
 
 export default function AboutPage() {
   return (
@@ -49,23 +29,40 @@ export default function AboutPage() {
       <Reveal>
         <Tabs defaultValue="mission">
           <TabsList>
-            {SECTIONS.map((section) => (
-              <TabsTrigger key={section.value} value={section.value}>
-                {section.label}
-              </TabsTrigger>
-            ))}
+            <TabsTrigger value="mission">Mission</TabsTrigger>
+            <TabsTrigger value="philosophy">Philosophy</TabsTrigger>
+            <TabsTrigger value="leadership">Leadership</TabsTrigger>
           </TabsList>
 
-          {SECTIONS.map((section) => (
-            <TabsContent key={section.value} value={section.value}>
-              <h2 className="font-heading text-xl font-semibold text-foreground">
-                {section.heading}
-              </h2>
-              <p className="mt-3 leading-relaxed text-muted-foreground">
-                {section.body}
-              </p>
-            </TabsContent>
-          ))}
+          <TabsContent value="mission">
+            <h2 className="font-heading text-xl font-semibold text-foreground">
+              Why IFM exists
+            </h2>
+            <p className="mt-3 leading-relaxed text-muted-foreground">
+              IFM is a socio-cultural and nationalist movement for the
+              Iwhuruohna people — built to unite our community, preserve our
+              history and language, inform members of movement updates,
+              amplify the voices of our people, and project our identity to
+              the world.
+            </p>
+          </TabsContent>
+
+          <TabsContent value="philosophy">
+            <h2 className="font-heading text-xl font-semibold text-foreground">
+              Iwhuruohna First
+            </h2>
+            <p className="mt-3 leading-relaxed text-muted-foreground">
+              We reject political tokenism. &quot;Iwhuruohna First&quot;
+              means our people&apos;s interests, dignity, and development
+              come before any party or politician&apos;s convenience — and
+              it means building real industry and opportunity at home, not
+              waiting for it.
+            </p>
+          </TabsContent>
+
+          <TabsContent value="leadership">
+            <LeadershipSection />
+          </TabsContent>
         </Tabs>
       </Reveal>
     </section>
