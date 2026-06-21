@@ -6,6 +6,7 @@ import { Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -21,9 +22,7 @@ const NAV_LINKS = [
 function Wordmark() {
   return (
     <Link href="/" className="flex items-center gap-3">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-green font-heading text-lg font-semibold text-cream">
-        I
-      </span>
+      <Logo className="h-9 w-auto shrink-0 sm:h-10" priority />
       <span className="font-heading text-base font-semibold leading-tight tracking-tight text-foreground sm:text-lg">
         <span className="no-break">Iwhuruohna</span>{" "}
         <span className="hidden sm:inline">First Movement</span>

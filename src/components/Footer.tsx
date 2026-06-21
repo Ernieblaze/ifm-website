@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Globe, Camera, Play } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Logo } from "@/components/Logo";
 
 const FOOTER_LINKS = [
   { href: "/", label: "Home" },
@@ -22,9 +23,7 @@ export default function Footer() {
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-green font-heading text-base font-semibold text-cream">
-                I
-              </span>
+              <Logo className="h-9 w-auto shrink-0" />
               <span className="font-heading text-lg font-semibold leading-tight tracking-tight text-foreground">
                 <span className="no-break">Iwhuruohna</span> First Movement
               </span>

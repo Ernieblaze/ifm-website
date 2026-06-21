@@ -4,10 +4,10 @@
 
 :root {
   /* Heritage palette — fixed brand hues, stable across light/dark */
-  --brand-green: #0e4d2f;
-  --accent-green: #1a7a4a;
+  --brand-green: #0a6b37;
+  --accent-green: #129a4c;
   --gold: #c68a2e;
-  --brand-red: #c8102e;
+  --brand-red: #e11d2a;
   --cream: #faf6ec;
   --ink: #14130f;
 
@@ -18,15 +18,15 @@
   --surface-muted: #f3ecd9;
   --border: rgb(20 19 15 / 0.1);
   --muted-foreground: rgb(20 19 15 / 0.65);
-  --ring: #0e4d2f;
+  --ring: #0a6b37;
 }
 
 .dark {
   /* Warm heritage dark mode — deep green/charcoal, never cold gray */
-  --brand-green: #2f9461;
-  --accent-green: #3fb579;
+  --brand-green: #22b567;
+  --accent-green: #3dd686;
   --gold: #d9a53f;
-  --brand-red: #e0506a;
+  --brand-red: #ff4b57;
   --cream: #f3efe2;
   --ink: #f3efe2;
 
@@ -36,7 +36,7 @@
   --surface-muted: #1d2a1f;
   --border: rgb(243 239 226 / 0.12);
   --muted-foreground: rgb(243 239 226 / 0.65);
-  --ring: #3fb579;
+  --ring: #3dd686;
 }
 
 @theme inline {

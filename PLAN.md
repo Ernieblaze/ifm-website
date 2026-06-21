@@ -174,13 +174,15 @@ Tables (snake_case). Use Row Level Security (RLS).
 **Direction:** professional, modern, identity-rooted — not a generic template. Mobile-first.
 
 **Colors (locked):** defined as CSS variables + Tailwind v4 `@theme` tokens in `src/app/globals.css`, with a warm dark-mode variant (never cold gray):
-- `brand-green` `#0E4D2F` — anchor accent, not large blocks
-- `accent-green` `#1A7A4A`
-- `gold` `#C68A2E` — heritage accent
-- `brand-red` `#C8102E` — strong emphasis only (primary CTA, key links)
+- `brand-green` `#0A6B37` (light) / `#22B567` (dark) — anchor accent; gets real "moments of dominance" (hero, CTA band, About-teaser white band's icon accents) but never an everywhere-default
+- `accent-green` `#129A4C` (light) / `#3DD686` (dark) — hover/lighter step
+- `gold` `#C68A2E` (light) / `#D9A53F` (dark) — heritage accent, used for eyebrows/kickers
+- `brand-red` `#E11D2A` (light) / `#FF4B57` (dark) — strong emphasis only (primary CTA, key links); the homepage Join/Register CTA button is red, not gold, to keep this rule consistent
 - `cream` `#FAF6EC` — dominant background
+- `white` / `surface` `#FFFFFF` (light) — cards and the About-teaser band sit on crisp white so they visibly lift off the cream
 - `ink` `#14130F` — body text
 - Semantic tokens (`background`, `foreground`, `surface`, `surface-muted`, `border`, `muted-foreground`, `ring`) swap per light/dark via `.dark` class, toggled with `next-themes`.
+- Section-level color rotation: the homepage mission strip (Preserve/Unite/Inform/Empower) deliberately rotates icon tone across green/gold/red instead of repeating green on every icon.
 
 **Typography (locked):**
 - Headings: **Fraunces** (serif) via `next/font/google`, mapped to `font-heading`.
@@ -260,7 +262,8 @@ Add the same variables in **Vercel → Project → Settings → Environment Vari
 
 ## 12. Assets & content needed from the team
 
-- [ ] Iwhuruohna **flag** image (+ logo if any) — drives the color palette
+- [x] **Logo** — official crest (`public/images/logo.png`, transparent PNG) is in use in the Navbar, Footer, and as the site favicon (`src/app/icon.png`, a 512×512 padded square crop generated from the source crest so it isn't squished in browser tabs)
+- [ ] Iwhuruohna **flag** image — still needed to finalize/confirm the color palette (current palette is a placeholder direction, not yet flag-derived)
 - [ ] **Mission statement** + short "Who We Are" paragraph
 - [ ] **History** content for the flagship page (rough notes are fine)
 - [ ] **Photos** cleared for use (events, culture, people)

@@ -20,29 +20,45 @@ import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { HeroMark } from "@/components/HeroMark";
 import { SectionHeading } from "@/components/SectionHeading";
 import { NEWS_ITEMS, ARTICLE_ITEMS, EVENT_ITEMS, STATS } from "@/lib/placeholder-data";
+import { cn } from "@/lib/utils";
+
+const TONE_CLASSES = {
+  green: "bg-brand-green/10 text-brand-green",
+  gold: "bg-gold/15 text-gold",
+  red: "bg-brand-red/10 text-brand-red",
+} as const;
 
 const VALUES = [
   {
     icon: Shield,
     title: "Preserve",
     body: "Our history, language, and traditions — documented and protected.",
+    tone: "green",
   },
   {
     icon: Users,
     title: "Unite",
     body: "One digital home for Iwhuruohna people everywhere.",
+    tone: "gold",
   },
   {
     icon: Megaphone,
     title: "Inform",
     body: "Movement updates and events, the moment they happen.",
+    tone: "red",
   },
   {
     icon: HeartHandshake,
     title: "Empower",
     body: "Real opportunity and industry built at home.",
+    tone: "green",
   },
-] as const;
+] as const satisfies ReadonlyArray<{
+  icon: typeof Shield;
+  title: string;
+  body: string;
+  tone: keyof typeof TONE_CLASSES;
+}>;
 
 function formatDate(value: string) {
   return new Date(value).toLocaleDateString("en-GB", {
@@ -63,10 +79,10 @@ export default function HomePage() {
             <span className="inline-flex items-center rounded-full bg-gold/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold">
               Iwhuruohna First Movement
             </span>
-            <h1 className="mt-6 max-w-2xl font-heading text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-5xl">
+            <h1 className="mt-6 max-w-2xl font-heading text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Uniting, preserving, and projecting{" "}
-              <span className="no-break">Iwhuruohna</span> identity — for
-              generations to come.
+              <span className="no-break text-brand-green">Iwhuruohna</span>{" "}
+              identity —{" "}for generations to come.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               A digital home for the Iwhuruohna (Ikwerre) people of Rivers
@@ -91,7 +107,12 @@ export default function HomePage() {
             {VALUES.map((value) => (
               <StaggerItem key={value.title}>
                 <div className="flex items-start gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                  <span
+                    className={cn(
+                      "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
+                      TONE_CLASSES[value.tone],
+                    )}
+                  >
                     <value.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <div>
@@ -109,29 +130,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. About teaser */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <Reveal>
-          <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-            Who We Are
-          </span>
-          <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            A movement, not a moment
-          </h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-            IFM is a socio-cultural and nationalist movement for the
-            Iwhuruohna people — built to unite our community, preserve our
-            history and language, inform members of movement updates,
-            amplify the voices of our people, and project our identity to
-            the world.
-          </p>
-          <Link
-            href="/about"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green transition-colors hover:text-accent-green"
-          >
-            Read more about the movement →
-          </Link>
-        </Reveal>
+      {/* 2. About teaser — white band gives white its own moment between the cream sections */}
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <Reveal>
+            <span className="text-xs font-semibold uppercase tracking-wide text-gold">
+              Who We Are
+            </span>
+            <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              A movement, not a moment
+            </h2>
+            <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
+              IFM is a socio-cultural and nationalist movement for the
+              Iwhuruohna people — built to unite our community, preserve our
+              history and language, inform members of movement updates,
+              amplify the voices of our people, and project our identity to
+              the world.
+            </p>
+            <Link
+              href="/about"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green transition-colors hover:text-accent-green"
+            >
+              Read more about the movement →
+            </Link>
+          </Reveal>
+        </div>
       </section>
 
       <PatternDivider className="mx-auto max-w-6xl px-4 sm:px-6" />
@@ -139,7 +162,7 @@ export default function HomePage() {
       {/* 3. Stats band */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
-          <div className="grid gap-8 rounded-2xl border border-border bg-surface p-8 text-center sm:grid-cols-3 sm:p-12">
+          <div className="grid gap-8 rounded-2xl border border-border bg-surface p-8 text-center shadow-md sm:grid-cols-3 sm:p-12">
             <div>
               <p className="font-heading text-4xl font-semibold text-brand-green">
                 <Counter value={STATS.members} suffix="+" />
@@ -299,7 +322,7 @@ export default function HomePage() {
               future for the Iwhuruohna people.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3">
-              <Button asChild size="lg" variant="accent">
+              <Button asChild size="lg" variant="destructive">
                 <Link href="/join">Register Now</Link>
               </Button>
               <p className="text-sm text-cream/70">
