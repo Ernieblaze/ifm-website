@@ -19,8 +19,14 @@ export default function AboutPage() {
           The Movement
         </h1>
         <p className="mt-6 leading-relaxed text-muted-foreground">
-          What IFM stands for, why it rejects political tokenism, and where
-          the movement is headed.
+          The <span className="no-break">Iwhuruohna</span> FIRST Movement
+          (IFM) is a nationalist movement devoted to protecting the{" "}
+          <span className="no-break">Iwhuruohna</span> woman, man, and child.
+          United under one purpose, we preach the gospel of{" "}
+          <span className="no-break">Iwhuruohna</span> FIRST — pursuing human
+          development, an industrial revolution, and the emancipation of our
+          people. Protectionism, nationalism, and progress are what we stand
+          for. Join us — for united, we are formidable.
         </p>
       </Reveal>
 
@@ -36,14 +42,15 @@ export default function AboutPage() {
 
           <TabsContent value="mission">
             <h2 className="font-heading text-xl font-semibold text-foreground">
-              Why IFM exists
+              Our Mission
             </h2>
             <p className="mt-3 leading-relaxed text-muted-foreground">
-              IFM is a socio-cultural and nationalist movement for the
-              Iwhuruohna people — built to unite our community, preserve our
-              history and language, inform members of movement updates,
-              amplify the voices of our people, and project our identity to
-              the world.
+              To protect and uplift the{" "}
+              <span className="no-break">Iwhuruohna</span> people through
+              nationalism and unity, and to drive an industrial revolution
+              that delivers real development, employment, and self-reliance
+              to our land — rejecting tokenism in favour of lasting
+              empowerment.
             </p>
           </TabsContent>
 

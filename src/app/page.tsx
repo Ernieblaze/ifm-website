@@ -1,10 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Shield,
+  Flag,
   Users,
-  Megaphone,
   HeartHandshake,
+  ShieldCheck,
+  Landmark,
+  Factory,
+  GraduationCap,
+  Heart,
   Newspaper,
   BookOpenText,
   CalendarDays,
@@ -31,37 +35,41 @@ const TONE_CLASSES = {
   red: "bg-brand-red/10 text-brand-red",
 } as const;
 
-const VALUES = [
-  {
-    icon: Shield,
-    title: "Preserve",
-    body: "Our history, language, and traditions — documented and protected.",
-    tone: "green",
-  },
-  {
-    icon: Users,
-    title: "Unite",
-    body: "One digital home for Iwhuruohna people everywhere.",
-    tone: "gold",
-  },
-  {
-    icon: Megaphone,
-    title: "Inform",
-    body: "Movement updates and events, the moment they happen.",
-    tone: "red",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Empower",
-    body: "Real opportunity and industry built at home.",
-    tone: "green",
-  },
+const CORE_VALUES = [
+  { icon: Flag, title: "Nationalism", tone: "green" },
+  { icon: Users, title: "Unity", tone: "gold" },
+  { icon: HeartHandshake, title: "Loyalty", tone: "red" },
+  { icon: ShieldCheck, title: "Duty", tone: "green" },
+  { icon: Landmark, title: "Cultural Preservation", tone: "gold" },
+  { icon: Factory, title: "Industrial Development", tone: "red" },
 ] as const satisfies ReadonlyArray<{
-  icon: typeof Shield;
+  icon: typeof Flag;
   title: string;
-  body: string;
   tone: keyof typeof TONE_CLASSES;
 }>;
+
+const PROGRAMS = [
+  {
+    icon: Landmark,
+    title: "Cultural Revival",
+    body: "Language, traditions, music, and the Miss IFM pageant.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Youth & Education",
+    body: "Student debates (UniPort, UST, Ignatius Ajuru) and school outreach against cultism and drug abuse.",
+  },
+  {
+    icon: Heart,
+    title: "Women & Girl-Child",
+    body: "Empowerment, skills, and visibility.",
+  },
+  {
+    icon: Factory,
+    title: "Industrialization Agenda",
+    body: "Advocating industries, employment, and self-reliance for Iwhuruohna land.",
+  },
+] as const;
 
 function formatDate(value: string) {
   return new Date(value).toLocaleDateString("en-GB", {
@@ -81,16 +89,19 @@ export default function HomePage() {
           <div className="flex flex-col items-start gap-12 lg:flex-row lg:items-center lg:justify-between">
             <Reveal className="max-w-2xl">
               <span className="inline-flex items-center rounded-full bg-gold/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold">
-                Iwhuruohna First Movement
+                <span className="no-break">Iwhuruohna</span> FIRST Movement · Est. 2018
               </span>
-              <h1 className="mt-6 font-heading text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-                Uniting, preserving, and projecting{" "}
-                <span className="no-break text-brand-green">Iwhuruohna</span>{" "}
-                identity —{" "}for generations to come.
+              <h1 className="mt-6 font-heading text-6xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
+                Unity. Loyalty. Duty.
               </h1>
+              <p className="mt-4 font-heading text-2xl font-semibold text-brand-green sm:text-3xl">
+                <span className="no-break">Iwhuruohna</span> FIRST.
+              </p>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                A digital home for the Iwhuruohna (Ikwerre) people of Rivers
-                State, Nigeria — wherever they are in the world.
+                A nationalist movement protecting the{" "}
+                <span className="no-break">Iwhuruohna</span> woman, man, and
+                child — and building our future through unity and an
+                industrial revolution.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button asChild size="lg" variant="primary">
@@ -121,37 +132,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 1. Mission / information strip */}
-      <section className="border-y border-border bg-surface-muted">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-          <Stagger className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {VALUES.map((value) => (
-              <StaggerItem key={value.title}>
-                <div className="flex items-start gap-3">
-                  <span
-                    className={cn(
-                      "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
-                      TONE_CLASSES[value.tone],
-                    )}
-                  >
-                    <value.icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="font-heading text-base font-semibold text-foreground">
-                      {value.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-snug text-muted-foreground">
-                      {value.body}
-                    </p>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* 2. About teaser — white band gives white its own moment between the cream sections */}
+      {/* 1. About */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <Reveal>
@@ -159,14 +140,18 @@ export default function HomePage() {
               Who We Are
             </span>
             <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-              A movement, not a moment
+              About the Movement
             </h2>
             <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-              IFM is a socio-cultural and nationalist movement for the
-              Iwhuruohna people — built to unite our community, preserve our
-              history and language, inform members of movement updates,
-              amplify the voices of our people, and project our identity to
-              the world.
+              The <span className="no-break">Iwhuruohna</span> FIRST Movement
+              (IFM) is a nationalist movement devoted to protecting the{" "}
+              <span className="no-break">Iwhuruohna</span> woman, man, and
+              child. United under one purpose, we preach the gospel of{" "}
+              <span className="no-break">Iwhuruohna</span> FIRST — pursuing
+              human development, an industrial revolution, and the
+              emancipation of our people. Protectionism, nationalism, and
+              progress are what we stand for. Join us — for united, we are
+              formidable.
             </p>
             <Link
               href="/about"
@@ -178,46 +163,135 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2b. Leadership */}
+      {/* 2. Mission */}
+      <section className="bg-surface-muted">
+        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+          <Reveal>
+            <span className="text-xs font-semibold uppercase tracking-wide text-gold">
+              Our Mission
+            </span>
+            <p className="mt-4 font-heading text-2xl font-semibold leading-snug text-foreground sm:text-3xl">
+              To protect and uplift the <span className="no-break">Iwhuruohna</span>{" "}
+              people through nationalism and unity, and to drive an
+              industrial revolution that delivers real development,
+              employment, and self-reliance to our land — rejecting
+              tokenism in favour of lasting empowerment.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 3. Core values */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <LeadershipSection />
+        <Reveal className="text-center">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gold">
+            What We Stand For
+          </span>
+          <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            Core Values
+          </h2>
+        </Reveal>
+        <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {CORE_VALUES.map((value) => (
+            <StaggerItem key={value.title}>
+              <Card className="flex h-full flex-col items-center text-center">
+                <span
+                  className={cn(
+                    "flex h-12 w-12 items-center justify-center rounded-full",
+                    TONE_CLASSES[value.tone],
+                  )}
+                >
+                  <value.icon className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 className="mt-4 font-heading text-base font-semibold text-foreground">
+                  {value.title}
+                </h3>
+              </Card>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </section>
 
       <PatternDivider className="mx-auto max-w-6xl px-4 sm:px-6" />
 
-      {/* 3. Stats band */}
+      {/* 4. Stats band */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
           <div className="grid gap-8 rounded-2xl border border-border bg-surface p-8 text-center shadow-md sm:grid-cols-3 sm:p-12">
-            <div>
-              <p className="font-heading text-4xl font-semibold text-brand-green">
+            <div className="flex flex-col items-center">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                <Users className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <p className="mt-4 font-heading text-3xl font-bold text-brand-green">
                 <Counter value={STATS.members} suffix="+" />
               </p>
               <p className="mt-2 text-sm font-medium text-muted-foreground">
-                Registered members
+                Members
               </p>
             </div>
-            <div>
-              <p className="font-heading text-4xl font-semibold text-brand-green">
-                <Counter value={STATS.communities} suffix="+" />
+            <div className="flex flex-col items-center">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                <CalendarDays className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <p className="mt-4 font-heading text-3xl font-bold text-brand-green">
+                {STATS.founded}
               </p>
               <p className="mt-2 text-sm font-medium text-muted-foreground">
-                Communities represented
+                Founded
               </p>
             </div>
-            <div>
-              <p className="font-heading text-4xl font-semibold text-brand-green">
-                <Counter value={STATS.events} suffix="+" />
+            <div className="flex flex-col items-center">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                <MapPin className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <p className="mt-4 font-heading text-2xl font-bold text-brand-green sm:text-3xl">
+                {STATS.headquarters}
               </p>
               <p className="mt-2 text-sm font-medium text-muted-foreground">
-                Events hosted
+                Headquarters
               </p>
             </div>
           </div>
         </Reveal>
       </section>
 
-      {/* 4. Latest news */}
+      {/* 5. What we do */}
+      <section className="bg-surface-muted">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <Reveal>
+            <span className="text-xs font-semibold uppercase tracking-wide text-gold">
+              Programs
+            </span>
+            <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              What We Do
+            </h2>
+          </Reveal>
+          <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PROGRAMS.map((program) => (
+              <StaggerItem key={program.title}>
+                <Card className="h-full">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                    <program.icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
+                    {program.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {program.body}
+                  </p>
+                </Card>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* 6. Leadership */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <LeadershipSection />
+      </section>
+
+      {/* 7. Latest news */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -248,7 +322,7 @@ export default function HomePage() {
         </Stagger>
       </section>
 
-      {/* 5. Featured articles */}
+      {/* 8. Featured articles */}
       <section className="bg-surface-muted">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <Reveal>
@@ -280,7 +354,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. History teaser */}
+      {/* 9. History teaser */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
           <span className="text-xs font-semibold uppercase tracking-wide text-gold">
@@ -302,7 +376,7 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* 7. Upcoming events teaser */}
+      {/* 10. Upcoming events teaser */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -336,31 +410,27 @@ export default function HomePage() {
         </Stagger>
       </section>
 
-      {/* 8. Join / register CTA band */}
+      {/* 11. Join / register CTA band */}
       <section className="bg-brand-green text-cream">
         <div className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
           <Reveal>
             <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-              Become part of the movement
+              <span className="no-break">Iwhuruohna</span> FIRST.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-cream/80">
-              Register as a member and help shape a stronger, more united
-              future for the Iwhuruohna people.
+              Add your voice to a movement of over{" "}
+              {STATS.members.toLocaleString()}.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3">
               <Button asChild size="lg" variant="destructive">
-                <Link href="/join">Register Now</Link>
+                <Link href="/join">Join the Movement</Link>
               </Button>
-              <p className="text-sm text-cream/70">
-                Join {STATS.members.toLocaleString()}+ members already part
-                of IFM
-              </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 9. Gallery teaser */}
+      {/* 12. Gallery teaser */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
           <span className="text-xs font-semibold uppercase tracking-wide text-gold">

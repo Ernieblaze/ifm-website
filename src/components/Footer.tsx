@@ -28,9 +28,12 @@ export default function Footer() {
                 <span className="no-break">Iwhuruohna</span> First Movement
               </span>
             </div>
+            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-gold">
+              Unity, Loyalty, Duty
+            </p>
             <p className="mt-3 text-sm text-muted-foreground">
-              A digital home for the Iwhuruohna (Ikwerre) people — uniting,
-              preserving, and amplifying our identity.
+              A nationalist movement protecting the Iwhuruohna woman, man,
+              and child — headquartered in Port Harcourt, Rivers State.
             </p>
 
             <ul className="mt-5 flex gap-2">

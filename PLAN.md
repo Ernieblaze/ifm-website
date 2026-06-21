@@ -6,7 +6,7 @@
 
 ## 1. Project overview
 
-A professional, mobile-first website for the **Iwhuruohna First Movement (IFM)** — a socio-cultural and nationalist organization for the Iwhuruohna (Ikwerre) people of Rivers State, Nigeria.
+A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)** — a nationalist movement founded **10 Nov 2018**, headquartered in **Port Harcourt, Rivers State**, devoted to protecting the Iwhuruohna woman, man, and child under the motto **"Unity, Loyalty, Duty."**
 
 **The site exists to do five jobs. Every feature must serve at least one:**
 
@@ -15,6 +15,8 @@ A professional, mobile-first website for the **Iwhuruohna First Movement (IFM)**
 3. **Inform** — publish movement updates, events, and announcements.
 4. **Amplify voices** — let members share their own stories.
 5. **Project globally** — a polished face that makes IFM stand out beyond Rivers State.
+
+**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs, Leadership, and Join CTA (see `src/app/page.tsx` and `src/app/about/page.tsx`). News, Articles, Events, History, and Gallery remain Phase 1 placeholders — see §12.
 
 ---
 
@@ -85,7 +87,7 @@ A professional, mobile-first website for the **Iwhuruohna First Movement (IFM)**
 
 | Page | Purpose | Phase |
 |---|---|---|
-| **Home** | Full multi-section page: hero, mission strip (Preserve/Unite/Inform/Empower), About teaser, member stats band, Latest News preview, Featured Articles preview, History teaser, Upcoming Events preview, Join/Register CTA band, Gallery teaser | 1 |
+| **Home** | Full multi-section page, real copy locked in: Hero (leader portrait) → About → Mission → Core Values (6) → Stats band → What We Do (4 programs) → Leadership → News preview → Articles preview → History teaser → Events preview → Join CTA → Gallery teaser | 1 |
 | **About / The Movement** | Mission, "Iwhuruohna First" philosophy, rejection of political tokenism, industrialization vision, leadership | 1 |
 | **Our History** | Flagship: origin narrative (Akalaka, the seven sons, Benin links), Ikwerre Essa, language, culture, distinct-identity position | 1 |
 | **News & Updates** | List of movement announcements (placeholder content in Phase 1; list + individual post pages once admin-published in Phase 2) | 1 (static) → 2 (dynamic) |
@@ -264,7 +266,7 @@ Add the same variables in **Vercel → Project → Settings → Environment Vari
 
 - [x] **Logo** — official crest (`public/images/logo.png`, transparent PNG) is in use in the Navbar, Footer, and as the site favicon (`src/app/icon.png`, a 512×512 padded square crop generated from the source crest so it isn't squished in browser tabs)
 - [ ] Iwhuruohna **flag** image — still needed to finalize/confirm the color palette (current palette is a placeholder direction, not yet flag-derived)
-- [ ] **Mission statement** + short "Who We Are" paragraph
+- [x] **Mission statement** + "Who We Are" / About copy — real, approved copy is live on the homepage and About page (see §1)
 - [ ] **History** content for the flagship page (rough notes are fine)
 - [ ] **Photos** cleared for use (events, culture, people)
 - [x] **Leadership** — first leader live: Emeka Ihruoha, IFM Supreme Leader (`public/images/leader.jpg`, `src/lib/leaders-data.ts`). Shown in the Home hero, a homepage Leadership section, and reused inside the About page's Leadership tab via `LeadershipSection`/`LeaderCard`. Each leader has a placeholder for a short message/quote until supplied — more leaders can be added by extending the `LEADERS` array.

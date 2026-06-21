@@ -104,10 +104,11 @@ export const EVENT_ITEMS: EventItem[] = [
   },
 ];
 
-// TODO(supabase): replace with a live count query once member registration
-// (see /join) is wired to Supabase Auth + a `members` table.
+// TODO(supabase): replace `members` with a live count query once member
+// registration (see /join) is wired to Supabase Auth + a `members` table.
+// `founded` and `headquarters` are fixed facts, not placeholders.
 export const STATS = {
-  members: 1400,
-  communities: 12,
-  events: 36,
+  members: 8000,
+  founded: "10 Nov 2018",
+  headquarters: "Port Harcourt, Rivers State",
 };
