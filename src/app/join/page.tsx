@@ -1,41 +1,31 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/Reveal";
-import { ContactForm } from "@/components/ContactForm";
+import { RegisterForm } from "@/components/RegisterForm";
+import { STATS } from "@/lib/placeholder-data";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Join",
 };
 
-export default function ContactPage() {
+export default function JoinPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <Reveal>
         <span className="inline-flex items-center rounded-full bg-brand-green/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-brand-green">
-          Contact
+          Join IFM
         </span>
         <h1 className="mt-4 font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          Get in Touch
+          Become a Member
         </h1>
         <p className="mt-6 leading-relaxed text-muted-foreground">
-          Have a question or want to connect with IFM? Reach out below.
+          Registration takes a minute. Join {STATS.members.toLocaleString()}+
+          Iwhuruohna people already part of the movement, at home and in the
+          diaspora.
         </p>
       </Reveal>
 
       <Reveal delay={0.1}>
-        <ContactForm />
-      </Reveal>
-
-      <Reveal delay={0.15}>
-        <div className="mt-12 border-t border-border pt-8">
-          <p className="text-sm font-semibold text-foreground">
-            Find us on social media
-          </p>
-          <ul className="mt-3 flex gap-6 text-sm text-muted-foreground">
-            <li>Facebook</li>
-            <li>Instagram</li>
-            <li>YouTube</li>
-          </ul>
-        </div>
+        <RegisterForm />
       </Reveal>
     </section>
   );

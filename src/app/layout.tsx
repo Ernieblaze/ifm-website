@@ -1,21 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { PageTransition } from "@/components/motion/PageTransition";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Iwhuruohna First Movement",
+  title: {
+    default: "Iwhuruohna First Movement",
+    template: "%s · Iwhuruohna First Movement",
+  },
   description:
     "A digital home for the Iwhuruohna (Ikwerre) people of Rivers State, Nigeria.",
 };
@@ -28,12 +36,22 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <MotionConfig reducedMotion="user">
+            <TooltipProvider delayDuration={150}>
+              <Navbar />
+              <main className="flex-1">
+                <PageTransition>{children}</PageTransition>
+              </main>
+              <Footer />
+              <Toaster position="bottom-right" />
+            </TooltipProvider>
+          </MotionConfig>
+        </ThemeProvider>
       </body>
     </html>
   );

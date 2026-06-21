@@ -56,12 +56,15 @@ A professional, mobile-first website for the **Iwhuruohna First Movement (IFM)**
 ├── /public                  ← static assets (flag, logo, og-image)
 ├── /src
 │   ├── /app
-│   │   ├── page.tsx                 # Home
+│   │   ├── page.tsx                 # Home (multi-section, see §5)
 │   │   ├── about/page.tsx
 │   │   ├── history/page.tsx
 │   │   ├── news/page.tsx
 │   │   ├── news/[slug]/page.tsx
+│   │   ├── articles/page.tsx
+│   │   ├── articles/[slug]/page.tsx
 │   │   ├── events/page.tsx
+│   │   ├── join/page.tsx             # member registration
 │   │   ├── stories/page.tsx
 │   │   ├── stories/submit/page.tsx
 │   │   ├── gallery/page.tsx
@@ -69,9 +72,10 @@ A professional, mobile-first website for the **Iwhuruohna First Movement (IFM)**
 │   │   └── admin/                   # login-protected (phase 2)
 │   │       ├── login/page.tsx
 │   │       └── dashboard/page.tsx
-│   ├── /components           # Navbar, Footer, Hero, Card, etc.
+│   ├── /components           # Navbar, Footer, SectionHeading, Card, ui/, etc.
 │   ├── /lib
-│   │   └── supabase.ts       # Supabase client(s)
+│   │   ├── supabase.ts       # Supabase client(s) (phase 2)
+│   │   └── placeholder-data.ts  # Phase 1 News/Articles/Events/stats — TODO(supabase)
 │   └── /styles
 ```
 
@@ -81,15 +85,16 @@ A professional, mobile-first website for the **Iwhuruohna First Movement (IFM)**
 
 | Page | Purpose | Phase |
 |---|---|---|
-| **Home** | Hero (flag/imagery + mission line), latest 3 updates, "Who We Are" teaser, CTAs | 1 |
+| **Home** | Full multi-section page: hero, mission strip (Preserve/Unite/Inform/Empower), About teaser, member stats band, Latest News preview, Featured Articles preview, History teaser, Upcoming Events preview, Join/Register CTA band, Gallery teaser | 1 |
 | **About / The Movement** | Mission, "Iwhuruohna First" philosophy, rejection of political tokenism, industrialization vision, leadership | 1 |
 | **Our History** | Flagship: origin narrative (Akalaka, the seven sons, Benin links), Ikwerre Essa, language, culture, distinct-identity position | 1 |
+| **News & Updates** | List of movement announcements (placeholder content in Phase 1; list + individual post pages once admin-published in Phase 2) | 1 (static) → 2 (dynamic) |
+| **Articles** | Longer-form editorial pieces on history, culture, and philosophy (placeholder content in Phase 1; list + individual article pages once dynamic) | 1 (static) → 2 (dynamic) |
+| **Events** | Upcoming + past events, auto-sorted (placeholder content in Phase 1) | 1 (static) → 2 (dynamic) |
+| **Join / Register** | Public member registration form; shows a live member count once wired to Supabase | 1 (static form) → 2 (persisted + live count) |
 | **Contact** | Form + social links (Facebook, Instagram, YouTube) | 1 |
-| **News & Updates** | Admin-published feed; list + individual post pages | 2 |
-| **Events** | Upcoming + past events, auto-sorted | 2 |
 | **Stories / Voices** | Member-submitted stories (admin-approved before publishing) + submission form | 2 |
-| **Gallery** | Photos/videos grouped into albums | 3 |
-| **Get Involved / Join** | Chapters, volunteering, how to join | 3 |
+| **Gallery** | Photos/videos grouped into albums (homepage has a teaser grid in Phase 1) | 3 |
 | **Admin dashboard** | Login-protected back end for managing all dynamic content | 2 |
 
 ---
@@ -98,18 +103,22 @@ A professional, mobile-first website for the **Iwhuruohna First Movement (IFM)**
 
 **Public (mostly static / read-only):**
 - Fast, mobile-first pages with strong cultural imagery.
-- News feed that updates instantly when admin publishes (no redeploy).
-- Event listings (upcoming vs. past).
+- Rich homepage: mission strip, About teaser, live-style member stats, News/Articles/Events previews, Join CTA, gallery teaser.
+- News feed that updates instantly when admin publishes (no redeploy) — Phase 1 ships with placeholder content.
+- Articles (long-form editorial) list + individual pages — Phase 1 ships with placeholder content.
+- Event listings (upcoming vs. past) — Phase 1 ships with placeholder content.
+- Public member registration (`/join`) with a displayed member count — Phase 1 form is client-only; Phase 2 persists to Supabase and the count goes live.
 - Story submission form → enters admin approval queue.
-- Media gallery with albums.
+- Media gallery with albums; homepage carries a teaser grid until real photography lands.
 - Social embeds (Facebook / YouTube) to reinforce existing pages.
 - Optional newsletter email capture (for diaspora reach later).
 - SEO: meta tags, Open Graph image, sitemap, semantic HTML.
 
 **Admin (login-protected, phase 2):**
 - Email + password login (Supabase Auth).
-- Create / edit / delete: news posts, events, gallery items.
+- Create / edit / delete: news posts, articles, events, gallery items.
 - Approve / reject member story submissions.
+- View / manage registered members.
 - Upload images (Supabase Storage).
 
 ---
@@ -124,6 +133,12 @@ Tables (snake_case). Use Row Level Security (RLS).
 **`events`**
 - `id` uuid pk, `title` text, `description` text, `location` text, `event_date` timestamptz, `cover_image_url` text, `published` bool default false, `created_at` timestamptz
 
+**`articles`** (long-form editorial)
+- `id` uuid pk, `title` text, `slug` text unique, `excerpt` text, `body` text, `author` text, `cover_image_url` text, `published` bool default false, `created_at` timestamptz, `updated_at` timestamptz
+
+**`members`** (public registrations from `/join`)
+- `id` uuid pk, `name` text, `email` text unique, `location` text, `note` text, `created_at` timestamptz
+
 **`stories`** (member submissions)
 - `id` uuid pk, `author_name` text, `author_contact` text, `title` text, `body` text, `image_url` text, `status` text default `'pending'` (`pending` | `approved` | `rejected`), `created_at` timestamptz
 
@@ -134,8 +149,8 @@ Tables (snake_case). Use Row Level Security (RLS).
 - `id` uuid pk, `email` text unique, `created_at` timestamptz
 
 **RLS policy intent:**
-- Anonymous (public) can **SELECT** rows where `published = true` (posts/events), `status = 'approved'` (stories), and all `gallery_items`.
-- Anonymous can **INSERT** into `stories` (submissions) and `subscribers` only.
+- Anonymous (public) can **SELECT** rows where `published = true` (posts/events/articles), `status = 'approved'` (stories), and all `gallery_items`.
+- Anonymous can **INSERT** into `stories` (submissions), `subscribers`, and `members` (registration) only. `members` should not be publicly readable beyond an aggregate count (expose via a count-only RPC/view, not direct table SELECT).
 - Authenticated admins can do **everything** (full read/write/delete).
 
 **Storage:** one public-read bucket (e.g. `media`) for images; write restricted to authenticated users.
@@ -158,24 +173,41 @@ Tables (snake_case). Use Row Level Security (RLS).
 
 **Direction:** professional, modern, identity-rooted — not a generic template. Mobile-first.
 
-**Colors:** finalize from the official **Iwhuruohna flag** (to be provided). Starting direction until then:
-- Primary: deep green or rich earth tone
-- Accent: gold / ochre
-- Text: near-black
-- Background: warm off-white / cream
+**Colors (locked):** defined as CSS variables + Tailwind v4 `@theme` tokens in `src/app/globals.css`, with a warm dark-mode variant (never cold gray):
+- `brand-green` `#0E4D2F` — anchor accent, not large blocks
+- `accent-green` `#1A7A4A`
+- `gold` `#C68A2E` — heritage accent
+- `brand-red` `#C8102E` — strong emphasis only (primary CTA, key links)
+- `cream` `#FAF6EC` — dominant background
+- `ink` `#14130F` — body text
+- Semantic tokens (`background`, `foreground`, `surface`, `surface-muted`, `border`, `muted-foreground`, `ring`) swap per light/dark via `.dark` class, toggled with `next-themes`.
 
-**Typography:**
-- Headings: a strong, characterful display/serif (heritage weight)
-- Body: a clean, highly readable sans-serif
+**Typography (locked):**
+- Headings: **Fraunces** (serif) via `next/font/google`, mapped to `font-heading`.
+- Body/UI: **Inter** via `next/font/google`, mapped to default `font-sans`.
+- "Iwhuruohna" never breaks mid-word in headings (`.no-break` + `text-wrap: balance` on headings).
+
+**Component libraries (locked):**
+- **shadcn/ui pattern + Radix primitives** (owned source, not a runtime dep) for Button, Input, Textarea, Label, Tabs, Tooltip, Dialog, Sheet, Dropdown Menu — in `src/components/ui/`.
+- **framer-motion** for scroll-reveal (`Reveal`, `Stagger`/`StaggerItem`), hover/press elevation on cards and buttons, the one quiet hero float, and route transitions (`PageTransition`) — fast (200–500ms), ease-out, no bounce.
+- **lucide-react** for all icons.
+- **sonner** for toast feedback on forms.
+
+**Motion conventions (locked, `src/components/motion/`):**
+- `Reveal` — single-block fade/slide-in, triggers once via `whileInView`.
+- `Stagger` + `StaggerItem` — wrap card grids/lists for a cascading reveal (`staggerChildren`); use instead of manually offsetting `Reveal` delays.
+- `Counter` — scroll-triggered count-up for stats; jumps straight to the final value under reduced motion.
+- `PageTransition` — wraps `{children}` in the root layout for a quick cross-fade between routes.
+- The hero's `HeroMark` is the **only** continuous/looping animation on the site (slow vertical float) — no other looping motion.
+- The whole app is wrapped in `<MotionConfig reducedMotion="user">` (`src/app/layout.tsx`) so transform/loop animations are automatically disabled for users with `prefers-reduced-motion` set; opacity fades still play.
 
 **Layout principles:**
-- Full-width hero with a powerful cultural image + mission line.
-- Imagery-forward (festivals, pageants, wrestling, gatherings, the flag).
-- A subtle traditional pattern used sparingly as dividers/section backgrounds.
+- Full-width hero, cream-dominant with sparse green/gold accent marks (no solid green blocks).
+- A subtle geometric pattern motif (`PatternDivider`) used sparingly as a section divider.
 - Generous spacing; dignified, not corporate-cold.
-- Mobile excellence before desktop.
-
-> When building UI, follow the repo's `frontend-design` guidance for design tokens and styling constraints.
+- Mobile excellence before desktop; phone nav uses a slide-in Sheet, and the wordmark shortens to "Iwhuruohna" below the `sm` breakpoint to avoid crowding.
+- All interactive controls keep a minimum 44×44px touch target (nav icons, theme toggle, sheet/dialog close, tabs, social icons).
+- Imagery-forward sections (festivals, pageants, wrestling, gatherings, the flag) once real photography is provided — see §12.
 
 ---
 
@@ -185,19 +217,21 @@ Tables (snake_case). Use Row Level Security (RLS).
 1. Scaffold Next.js + Tailwind; init GitHub repo; first deploy to Vercel (live URL day one).
 2. Build Navbar + Footer + design tokens (colors/fonts from flag).
 3. Build Home, About, History, Contact (content hard-coded for now).
-4. SEO basics + Open Graph image. **→ Ship & share.**
+4. Build the full multi-section homepage, plus News, Articles, Events, and Join pages with placeholder content (`src/lib/placeholder-data.ts`) — all marked with `TODO(supabase)` for Phase 2.
+5. SEO basics + Open Graph image. **→ Ship & share.**
 
 **Phase 2 — Backend + admin**
-5. Create Supabase project; add tables, RLS, storage bucket; wire env vars.
-6. Build admin login + dashboard.
-7. Convert News and Events to dynamic (read from Supabase).
-8. Build Stories page + submission form + approval flow.
+6. Create Supabase project; add tables (incl. `articles`, `members`), RLS, storage bucket; wire env vars.
+7. Build admin login + dashboard.
+8. Convert News, Articles, and Events to dynamic (read from Supabase); replace `placeholder-data.ts`.
+9. Persist `/join` registrations to `members`; show a live member count on the homepage stats band.
+10. Build Stories page + submission form + approval flow.
 
 **Phase 3 — Polish & grow**
-9. Gallery + albums; social embeds.
-10. Newsletter capture; Get Involved page.
-11. Performance + accessibility + final design pass.
-12. (Optional) custom domain.
+11. Gallery + albums (replace homepage teaser); social embeds.
+12. Newsletter capture; Get Involved page.
+13. Performance + accessibility + final design pass.
+14. (Optional) custom domain.
 
 ---
 
