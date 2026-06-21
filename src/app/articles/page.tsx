@@ -38,7 +38,7 @@ export default function ArticlesPage() {
                 {item.excerpt}
               </p>
               <p className="mt-4 text-xs text-muted-foreground">
-                {item.author} · {item.readTime}
+                {item.author}, {item.readTime}
               </p>
             </Card>
           </StaggerItem>

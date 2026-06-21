@@ -33,7 +33,7 @@ export default function Footer() {
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
               A nationalist movement protecting the Iwhuruohna woman, man,
-              and child — headquartered in Port Harcourt, Rivers State.
+              and child, headquartered in Port Harcourt, Rivers State.
             </p>
 
             <ul className="mt-5 flex gap-2">

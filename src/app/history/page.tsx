@@ -20,7 +20,7 @@ const TIMELINE = [
   {
     era: "Identity",
     title: "Ikwerre Essa and a distinct people",
-    body: "The Ikwerre Essa and our language place Iwhuruohna people as a distinct cultural identity within Rivers State — not a subset of any other group.",
+    body: "The Ikwerre Essa and our language place Iwhuruohna people as a distinct cultural identity within Rivers State, not a subset of any other group.",
   },
   {
     era: "Today",
@@ -40,10 +40,10 @@ export default function HistoryPage() {
           Origins of the <span className="no-break">Iwhuruohna</span> People
         </h1>
         <p className="mt-6 leading-relaxed text-muted-foreground">
-          This flagship page will grow into the full origin narrative —
-          Akalaka, the seven sons, Benin links, Ikwerre Essa, our language,
-          our culture, and our distinct identity. Below is a preview of what
-          it will cover.
+          This flagship page will grow into the full origin narrative,
+          covering Akalaka, the seven sons, Benin links, Ikwerre Essa, our
+          language, our culture, and our distinct identity. Below is a
+          preview of what it will cover.
         </p>
       </Reveal>
 

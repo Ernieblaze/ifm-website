@@ -26,7 +26,7 @@ export default function NewsPage() {
           News
         </span>
         <h1 className="mt-4 font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          News &amp; Updates
+          News and Updates
         </h1>
         <p className="mt-6 max-w-2xl leading-relaxed text-muted-foreground">
           Movement announcements, culture notes, and updates from across the

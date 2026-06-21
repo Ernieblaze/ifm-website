@@ -34,26 +34,41 @@ export default function EventsPage() {
       </Reveal>
 
       <Stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {EVENT_ITEMS.map((item) => (
-          <StaggerItem key={item.slug}>
-            <Card className="h-full">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
-                <CalendarDays className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <h2 className="mt-4 font-heading text-lg font-semibold text-foreground">
-                {item.title}
-              </h2>
-              <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
-                <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
-                {formatDate(item.date)}
-              </p>
-              <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                {item.location}
-              </p>
-            </Card>
-          </StaggerItem>
-        ))}
+        {EVENT_ITEMS.map((item, index) => {
+          const label = item.title ?? `Event ${index + 1}`;
+          return (
+            <StaggerItem key={item.slug}>
+              <Card className="h-full">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                  <CalendarDays className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <h2 className="mt-4 font-heading text-lg font-semibold text-foreground">
+                  {label}
+                </h2>
+                {item.date || item.location ? (
+                  <>
+                    {item.date && (
+                      <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
+                        {formatDate(item.date)}
+                      </p>
+                    )}
+                    {item.location && (
+                      <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                        {item.location}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Details coming soon.
+                  </p>
+                )}
+              </Card>
+            </StaggerItem>
+          );
+        })}
       </Stagger>
     </section>
   );

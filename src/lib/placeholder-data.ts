@@ -74,34 +74,35 @@ export const ARTICLE_ITEMS: ArticleItem[] = [
 
 export interface EventItem {
   slug: string;
-  title: string;
-  date: string;
-  location: string;
-  status: "upcoming" | "past";
+  // TODO(content): fill in title, date, location, and status as real dated
+  // events are confirmed. Until then, the UI falls back to a generic
+  // "Event N" label and a "Details coming soon" line.
+  title?: string;
+  date?: string;
+  location?: string;
+  status?: "upcoming" | "past";
 }
 
 export const EVENT_ITEMS: EventItem[] = [
-  {
-    slug: "annual-cultural-gathering",
-    title: "Annual Cultural Gathering",
-    date: "2026-08-15",
-    location: "Port Harcourt, Rivers State",
-    status: "upcoming",
-  },
-  {
-    slug: "diaspora-town-hall",
-    title: "Diaspora Town Hall (Virtual)",
-    date: "2026-07-02",
-    location: "Online",
-    status: "upcoming",
-  },
-  {
-    slug: "youth-leadership-forum",
-    title: "Youth Leadership Forum",
-    date: "2026-09-20",
-    location: "Ikwerre LGA",
-    status: "upcoming",
-  },
+  { slug: "event-1" },
+  { slug: "event-2" },
+  { slug: "event-3" },
+];
+
+export interface GalleryItem {
+  slug: string;
+  image: string;
+  // TODO(content): add a real caption once captions are confirmed.
+  caption?: string;
+}
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  { slug: "gallery-1", image: "/images/gallery-1.jpg" },
+  { slug: "gallery-2", image: "/images/gallery-2.jpg" },
+  { slug: "gallery-3", image: "/images/gallery-3.jpg" },
+  { slug: "gallery-4", image: "/images/gallery-4.jpg" },
+  { slug: "gallery-5", image: "/images/gallery-5.jpg" },
+  { slug: "gallery-6", image: "/images/gallery-6.jpg" },
 ];
 
 // TODO(supabase): replace `members` with a live count query once member

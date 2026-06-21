@@ -50,7 +50,7 @@ export function ContactForm() {
       setSubmitting(false);
       form.reset();
       toast.success("Message sent.", {
-        description: "Thanks for reaching out — we'll respond soon.",
+        description: "Thanks for reaching out. We'll respond soon.",
       });
     }, 700);
   }

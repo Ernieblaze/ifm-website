@@ -16,16 +16,16 @@ const NAV_LINKS = [
   { href: "/news", label: "News" },
   { href: "/articles", label: "Articles" },
   { href: "/events", label: "Events" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 
 function Wordmark() {
   return (
-    <Link href="/" className="flex items-center gap-3">
-      <Logo className="h-9 w-auto shrink-0 sm:h-10" priority />
-      <span className="font-heading text-base font-semibold leading-tight tracking-tight text-foreground sm:text-lg">
-        <span className="no-break">Iwhuruohna</span>{" "}
-        <span className="hidden sm:inline">First Movement</span>
+    <Link href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
+      <Logo className="h-8 w-auto shrink-0 sm:h-9 lg:h-10" priority />
+      <span className="min-w-0 font-heading text-sm font-semibold leading-tight tracking-tight text-foreground sm:text-base lg:text-lg">
+        <span className="no-break">Iwhuruohna</span> First Movement
       </span>
     </Link>
   );

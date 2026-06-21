@@ -23,10 +23,10 @@ export default function AboutPage() {
           (IFM) is a nationalist movement devoted to protecting the{" "}
           <span className="no-break">Iwhuruohna</span> woman, man, and child.
           United under one purpose, we preach the gospel of{" "}
-          <span className="no-break">Iwhuruohna</span> FIRST — pursuing human
+          <span className="no-break">Iwhuruohna</span> FIRST, pursuing human
           development, an industrial revolution, and the emancipation of our
           people. Protectionism, nationalism, and progress are what we stand
-          for. Join us — for united, we are formidable.
+          for. Join us. United, we are formidable.
         </p>
       </Reveal>
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
               <span className="no-break">Iwhuruohna</span> people through
               nationalism and unity, and to drive an industrial revolution
               that delivers real development, employment, and self-reliance
-              to our land — rejecting tokenism in favour of lasting
+              to our land, rejecting tokenism in favour of lasting
               empowerment.
             </p>
           </TabsContent>
@@ -61,8 +61,8 @@ export default function AboutPage() {
             <p className="mt-3 leading-relaxed text-muted-foreground">
               We reject political tokenism. &quot;Iwhuruohna First&quot;
               means our people&apos;s interests, dignity, and development
-              come before any party or politician&apos;s convenience — and
-              it means building real industry and opportunity at home, not
+              come before any party or politician&apos;s convenience. It
+              means building real industry and opportunity at home, not
               waiting for it.
             </p>
           </TabsContent>

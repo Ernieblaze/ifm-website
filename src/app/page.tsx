@@ -13,7 +13,6 @@ import {
   BookOpenText,
   CalendarDays,
   MapPin,
-  ImageIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,7 +24,13 @@ import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { HeroMark } from "@/components/HeroMark";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LeadershipSection } from "@/components/LeadershipSection";
-import { NEWS_ITEMS, ARTICLE_ITEMS, EVENT_ITEMS, STATS } from "@/lib/placeholder-data";
+import {
+  NEWS_ITEMS,
+  ARTICLE_ITEMS,
+  EVENT_ITEMS,
+  GALLERY_ITEMS,
+  STATS,
+} from "@/lib/placeholder-data";
 import { LEADERS } from "@/lib/leaders-data";
 import { cn } from "@/lib/utils";
 
@@ -56,12 +61,12 @@ const PROGRAMS = [
   },
   {
     icon: GraduationCap,
-    title: "Youth & Education",
+    title: "Youth and Education",
     body: "Student debates (UniPort, UST, Ignatius Ajuru) and school outreach against cultism and drug abuse.",
   },
   {
     icon: Heart,
-    title: "Women & Girl-Child",
+    title: "Women and Girl-Child",
     body: "Empowerment, skills, and visibility.",
   },
   {
@@ -89,7 +94,7 @@ export default function HomePage() {
           <div className="flex flex-col items-start gap-12 lg:flex-row lg:items-center lg:justify-between">
             <Reveal className="max-w-2xl">
               <span className="inline-flex items-center rounded-full bg-gold/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold">
-                <span className="no-break">Iwhuruohna</span> FIRST Movement · Est. 2018
+                <span className="no-break">Iwhuruohna</span> FIRST Movement. Est. 2018
               </span>
               <h1 className="mt-6 font-heading text-6xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
                 Unity. Loyalty. Duty.
@@ -100,8 +105,8 @@ export default function HomePage() {
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
                 A nationalist movement protecting the{" "}
                 <span className="no-break">Iwhuruohna</span> woman, man, and
-                child — and building our future through unity and an
-                industrial revolution.
+                child, building our future through unity and an industrial
+                revolution.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button asChild size="lg" variant="primary">
@@ -114,18 +119,27 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={0.15} className="self-center lg:shrink-0 lg:self-auto">
-              <div className="relative h-48 w-48 overflow-hidden rounded-3xl border-4 border-surface shadow-xl ring-1 ring-brand-green/20 sm:h-56 sm:w-56 lg:h-64 lg:w-64">
+              <div className="relative h-56 w-56 sm:h-64 sm:w-64 lg:h-80 lg:w-80">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 scale-125 rounded-full bg-gradient-to-br from-brand-green/60 via-brand-green/25 to-transparent blur-2xl"
+                />
                 <Image
                   src={LEADERS[0].photo}
                   alt={LEADERS[0].photoAlt}
                   fill
-                  sizes="(min-width: 1024px) 256px, (min-width: 640px) 224px, 192px"
-                  className="object-cover"
+                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 256px, 224px"
+                  className="object-contain drop-shadow-[0_20px_35px_rgba(10,107,55,0.45)] [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
                   priority
                 />
               </div>
-              <p className="mt-3 text-center text-xs font-medium text-muted-foreground sm:text-sm">
-                {LEADERS[0].name} <span className="text-border">·</span> {LEADERS[0].title}
+              <p className="mt-4 text-center">
+                <span className="block font-heading text-lg font-bold text-foreground sm:text-xl">
+                  {LEADERS[0].name}
+                </span>
+                <span className="block text-sm font-medium text-muted-foreground">
+                  {LEADERS[0].title}
+                </span>
               </p>
             </Reveal>
           </div>
@@ -147,10 +161,10 @@ export default function HomePage() {
               (IFM) is a nationalist movement devoted to protecting the{" "}
               <span className="no-break">Iwhuruohna</span> woman, man, and
               child. United under one purpose, we preach the gospel of{" "}
-              <span className="no-break">Iwhuruohna</span> FIRST — pursuing
+              <span className="no-break">Iwhuruohna</span> FIRST, pursuing
               human development, an industrial revolution, and the
               emancipation of our people. Protectionism, nationalism, and
-              progress are what we stand for. Join us — for united, we are
+              progress are what we stand for. Join us. United, we are
               formidable.
             </p>
             <Link
@@ -174,8 +188,8 @@ export default function HomePage() {
               To protect and uplift the <span className="no-break">Iwhuruohna</span>{" "}
               people through nationalism and unity, and to drive an
               industrial revolution that delivers real development,
-              employment, and self-reliance to our land — rejecting
-              tokenism in favour of lasting empowerment.
+              employment, and self-reliance to our land, rejecting tokenism
+              in favour of lasting empowerment.
             </p>
           </Reveal>
         </div>
@@ -345,7 +359,7 @@ export default function HomePage() {
                     {item.excerpt}
                   </p>
                   <p className="mt-4 text-xs text-muted-foreground">
-                    {item.author} · {item.readTime}
+                    {item.author}, {item.readTime}
                   </p>
                 </Card>
               </StaggerItem>
@@ -364,8 +378,8 @@ export default function HomePage() {
             Origins of the <span className="no-break">Iwhuruohna</span> people
           </h2>
           <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-            Akalaka, the seven sons, the Benin links, and the Ikwerre Essa —
-            the origin narrative that makes us a distinct people.
+            Akalaka, the seven sons, the Benin links, and the Ikwerre Essa
+            form the origin narrative that makes us a distinct people.
           </p>
           <Link
             href="/history"
@@ -387,26 +401,41 @@ export default function HomePage() {
           />
         </Reveal>
         <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {EVENT_ITEMS.slice(0, 3).map((item) => (
-            <StaggerItem key={item.slug}>
-              <Card className="h-full">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
-                  <CalendarDays className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
-                  {formatDate(item.date)}
-                </p>
-                <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                  {item.location}
-                </p>
-              </Card>
-            </StaggerItem>
-          ))}
+          {EVENT_ITEMS.slice(0, 3).map((item, index) => {
+            const label = item.title ?? `Event ${index + 1}`;
+            return (
+              <StaggerItem key={item.slug}>
+                <Card className="h-full">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                    <CalendarDays className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
+                    {label}
+                  </h3>
+                  {item.date || item.location ? (
+                    <>
+                      {item.date && (
+                        <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
+                          <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
+                          {formatDate(item.date)}
+                        </p>
+                      )}
+                      {item.location && (
+                        <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                          <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                          {item.location}
+                        </p>
+                      )}
+                    </>
+                  ) : (
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Details coming soon.
+                    </p>
+                  )}
+                </Card>
+              </StaggerItem>
+            );
+          })}
         </Stagger>
       </section>
 
@@ -433,21 +462,28 @@ export default function HomePage() {
       {/* 12. Gallery teaser */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
-          <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-            Moments
-          </span>
-          <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Gallery
-          </h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-            Photos from gatherings, festivals, and community events will live
-            here as the movement grows.
-          </p>
+          <SectionHeading
+            eyebrow="Moments"
+            title="Gallery"
+            description="Places the movement has been and things we have done."
+            href="/gallery"
+            linkLabel="View full gallery"
+          />
         </Reveal>
         <Stagger className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <StaggerItem key={index}>
-              <PlaceholderImage label="Photo coming soon" icon={ImageIcon} aspect="square" />
+          {GALLERY_ITEMS.map((item) => (
+            <StaggerItem key={item.slug}>
+              <Card className="aspect-square overflow-hidden p-0">
+                <div className="relative h-full w-full">
+                  <Image
+                    src={item.image}
+                    alt={item.caption ?? "Photo from the movement"}
+                    fill
+                    sizes="(min-width: 1024px) 180px, (min-width: 640px) 220px, 45vw"
+                    className="object-cover"
+                  />
+                </div>
+              </Card>
             </StaggerItem>
           ))}
         </Stagger>

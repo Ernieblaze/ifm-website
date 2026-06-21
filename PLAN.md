@@ -16,7 +16,7 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 4. **Amplify voices** — let members share their own stories.
 5. **Project globally** — a polished face that makes IFM stand out beyond Rivers State.
 
-**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs, Leadership, and Join CTA (see `src/app/page.tsx` and `src/app/about/page.tsx`). News, Articles, Events, History, and Gallery remain Phase 1 placeholders — see §12.
+**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs, Leadership, and Join CTA (see `src/app/page.tsx` and `src/app/about/page.tsx`). News, Articles, Events, and History remain Phase 1 placeholders; Gallery has real photos but placeholder captions — see §12.
 
 ---
 
@@ -92,11 +92,11 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 | **Our History** | Flagship: origin narrative (Akalaka, the seven sons, Benin links), Ikwerre Essa, language, culture, distinct-identity position | 1 |
 | **News & Updates** | List of movement announcements (placeholder content in Phase 1; list + individual post pages once admin-published in Phase 2) | 1 (static) → 2 (dynamic) |
 | **Articles** | Longer-form editorial pieces on history, culture, and philosophy (placeholder content in Phase 1; list + individual article pages once dynamic) | 1 (static) → 2 (dynamic) |
-| **Events** | Upcoming + past events, auto-sorted (placeholder content in Phase 1) | 1 (static) → 2 (dynamic) |
+| **Events** | Upcoming + past events, auto-sorted. Neutral placeholder ("Event N", "Details coming soon"); no photos here, this section is for dated events only once real titles/dates/locations/status are confirmed. | 1 (static) → 2 (dynamic) |
 | **Join / Register** | Public member registration form; shows a live member count once wired to Supabase | 1 (static form) → 2 (persisted + live count) |
 | **Contact** | Form + social links (Facebook, Instagram, YouTube) | 1 |
 | **Stories / Voices** | Member-submitted stories (admin-approved before publishing) + submission form | 2 |
-| **Gallery** | Photos/videos grouped into albums (homepage has a teaser grid in Phase 1) | 3 |
+| **Gallery** | Photos/videos grouped into albums. Six real photos live (`public/images/gallery-1.jpg` to `gallery-6.jpg`, places the movement has been and things it has done) on both `/gallery` and the homepage teaser; albums/captions still to come. | 1 (photos) → 3 (albums) |
 | **Admin dashboard** | Login-protected back end for managing all dynamic content | 2 |
 
 ---
@@ -191,6 +191,8 @@ Tables (snake_case). Use Row Level Security (RLS).
 - Body/UI: **Inter** via `next/font/google`, mapped to default `font-sans`.
 - "Iwhuruohna" never breaks mid-word in headings (`.no-break` + `text-wrap: balance` on headings).
 
+**Copy style (locked):** no em dashes, en dashes, ampersands, or middots in visible site copy (headings, eyebrows, stats, cards, CTAs, toasts). Join clauses with a period, a comma, or "and" instead, e.g. "Iwhuruohna FIRST Movement. Est. 2018" not "... · Est. 2018", "Women and Girl-Child" not "Women & Girl-Child". Arrow glyphs (e.g. "Read more →") are fine; this rule is about dash/slash/ampersand punctuation reading as AI-generated, not all special characters. PLAN.md itself isn't held to this (it's internal documentation, not site copy).
+
 **Component libraries (locked):**
 - **shadcn/ui pattern + Radix primitives** (owned source, not a runtime dep) for Button, Input, Textarea, Label, Tabs, Tooltip, Dialog, Sheet, Dropdown Menu — in `src/components/ui/`.
 - **framer-motion** for scroll-reveal (`Reveal`, `Stagger`/`StaggerItem`), hover/press elevation on cards and buttons, the one quiet hero float, and route transitions (`PageTransition`) — fast (200–500ms), ease-out, no bounce.
@@ -209,9 +211,10 @@ Tables (snake_case). Use Row Level Security (RLS).
 - Full-width hero, cream-dominant with sparse green/gold accent marks (no solid green blocks).
 - A subtle geometric pattern motif (`PatternDivider`) used sparingly as a section divider.
 - Generous spacing; dignified, not corporate-cold.
-- Mobile excellence before desktop; phone nav uses a slide-in Sheet, and the wordmark shortens to "Iwhuruohna" below the `sm` breakpoint to avoid crowding.
+- Mobile excellence before desktop; phone nav uses a slide-in Sheet. The navbar wordmark always shows the full "Iwhuruohna First Movement" (logo shrinks and text wraps to two lines on narrow screens instead of truncating).
 - All interactive controls keep a minimum 44×44px touch target (nav icons, theme toggle, sheet/dialog close, tabs, social icons).
 - Imagery-forward sections (festivals, pageants, wrestling, gatherings, the flag) once real photography is provided — see §12.
+- Leader portraits (hero + `LeaderCard`) are transparent-background PNG cutouts placed directly on a soft blurred brand-green gradient backdrop, no card, box, or clipping frame behind them, just a `drop-shadow` for lift and a bottom mask-fade so the photo blends into the section. Hero portrait is sized 224 to 320px (mobile to desktop); name is bold, title is a lighter weight beneath it.
 
 ---
 
@@ -268,8 +271,10 @@ Add the same variables in **Vercel → Project → Settings → Environment Vari
 - [ ] Iwhuruohna **flag** image — still needed to finalize/confirm the color palette (current palette is a placeholder direction, not yet flag-derived)
 - [x] **Mission statement** + "Who We Are" / About copy — real, approved copy is live on the homepage and About page (see §1)
 - [ ] **History** content for the flagship page (rough notes are fine)
-- [ ] **Photos** cleared for use (events, culture, people)
-- [x] **Leadership** — first leader live: Emeka Ihruoha, IFM Supreme Leader (`public/images/leader.jpg`, `src/lib/leaders-data.ts`). Shown in the Home hero, a homepage Leadership section, and reused inside the About page's Leadership tab via `LeadershipSection`/`LeaderCard`. Each leader has a placeholder for a short message/quote until supplied — more leaders can be added by extending the `LEADERS` array.
+- [x] **Gallery photos** — six images live at `public/images/gallery-1.jpg` to `gallery-6.jpg`, shown on `/gallery` and the homepage Gallery teaser (`src/lib/placeholder-data.ts`). These are general movement photos, not tied to dated events. Real captions and album groupings are still needed.
+- [ ] **Dated event details** — `/events` is back to a neutral placeholder ("Event N", "Details coming soon"); needs real titles, dates, locations, and past/upcoming status, plus its own photos once available
+- [ ] **Photos** cleared for use (culture, people, more events)
+- [x] **Leadership** — first leader live: Emeka Ihruoha, IFM Supreme Leader (`public/images/leader.png`, a transparent-background cutout; `src/lib/leaders-data.ts`). Shown in the Home hero, a homepage Leadership section, and reused inside the About page's Leadership tab via `LeadershipSection`/`LeaderCard`. Each leader has a placeholder for a short message/quote until supplied — more leaders can be added by extending the `LEADERS` array.
 - [ ] **Social links** (Facebook page, Instagram, YouTube)
 - [ ] Number of **admins** needing login access
 

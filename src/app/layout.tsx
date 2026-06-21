@@ -21,11 +21,11 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   title: {
-    default: "Iwhuruohna FIRST Movement (IFM) · Unity, Loyalty, Duty",
-    template: "%s · Iwhuruohna FIRST Movement",
+    default: "Iwhuruohna FIRST Movement (IFM). Unity, Loyalty, Duty",
+    template: "%s. Iwhuruohna FIRST Movement",
   },
   description:
-    "The Iwhuruohna FIRST Movement (IFM) is a nationalist movement protecting the Iwhuruohna woman, man, and child — based in Port Harcourt, Rivers State, Nigeria. Unity, Loyalty, Duty.",
+    "The Iwhuruohna FIRST Movement (IFM) is a nationalist movement protecting the Iwhuruohna woman, man, and child. Based in Port Harcourt, Rivers State, Nigeria. Unity, Loyalty, Duty.",
 };
 
 export default function RootLayout({
