@@ -16,7 +16,7 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 4. **Amplify voices** — let members share their own stories.
 5. **Project globally** — a polished face that makes IFM stand out beyond Rivers State.
 
-**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs, Leadership, Join CTA, and the Our Story intro and founding milestone (see `src/app/page.tsx`, `src/app/about/page.tsx`, and `src/app/history/page.tsx`). News, Articles, and Events remain Phase 1 placeholders; Our Story has three placeholder milestones pending confirmed details; Gallery has real photos but placeholder captions — see §12.
+**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs (homepage and the full `/programs` page), Leadership, Join CTA, and the Our Story intro and founding milestone (see `src/app/page.tsx`, `src/app/about/page.tsx`, `src/app/programs/page.tsx`, and `src/app/history/page.tsx`). News, Articles, and Events remain Phase 1 placeholders; Our Story has three placeholder milestones pending confirmed details; the Programs page is missing event dates and photos for its programs; Gallery has real photos but placeholder captions — see §12.
 
 ---
 
@@ -89,6 +89,7 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 |---|---|---|
 | **Home** | Full multi-section page, real copy locked in: Hero (leader portrait) → About → Mission → Core Values (6) → Stats band → What We Do (4 programs) → Leadership → News preview → Articles preview → History teaser → Events preview → Join CTA → Gallery teaser | 1 |
 | **About / The Movement** | Mission, "Iwhuruohna First" philosophy, rejection of political tokenism, industrialization vision, leadership | 1 |
+| **Programs** (`/programs`) | Full detail on the five confirmed programs (`programs` array in `src/app/programs/page.tsx`): Cultural Revival and Miss IFM, Student Debates, School Outreach, Women and Girl Child Empowerment, Industrialization Agenda. Real, confirmed copy throughout, no invented dates, locations, or numbers. The homepage's abbreviated "What We Do" section links here via "View all programs." Ends with the shared `JoinCtaBand`. Event dates and photos for these programs are still pending. | 1 |
 | **Our Story** (`/history`, nav labeled "Our Story") | Real, confirmed copy: founding in Port Harcourt on 10 November 2018, the movement's purpose, and a data-driven vertical timeline (`milestones` array in `src/app/history/page.tsx`). Only the founding entry is real; three placeholder milestone slots (visually muted, dashed) are waiting on confirmed dates and details from group records, not invented. Ends with the shared `JoinCtaBand`. | 1 |
 | **News & Updates** | List of movement announcements (placeholder content in Phase 1; list + individual post pages once admin-published in Phase 2) | 1 (static) → 2 (dynamic) |
 | **Articles** | Longer-form editorial pieces on history, culture, and philosophy (placeholder content in Phase 1; list + individual article pages once dynamic) | 1 (static) → 2 (dynamic) |
@@ -273,6 +274,8 @@ Add the same variables in **Vercel → Project → Settings → Environment Vari
 - [x] **Mission statement** + "Who We Are" / About copy — real, approved copy is live on the homepage and About page (see §1)
 - [x] **Our Story intro and founding milestone** — real copy live on `/history` (founding in Port Harcourt, 10 November 2018, the movement's purpose, Unity Loyalty Duty)
 - [ ] **Three more confirmed milestones** for the Our Story timeline (`milestones` array in `src/app/history/page.tsx`); currently dashed, muted placeholder slots, no invented dates or claims
+- [x] **Programs detail page** — `/programs` live with the five confirmed programs (`src/app/programs/page.tsx`)
+- [ ] **Program event dates and photos** — each program on `/programs` (Cultural Revival and Miss IFM, Student Debates, School Outreach, Women and Girl Child Empowerment, Industrialization Agenda) still needs specific event dates and cleared photos
 - [x] **Gallery photos** — six images live at `public/images/gallery-1.jpg` to `gallery-6.jpg`, shown on `/gallery` and the homepage Gallery teaser (`src/lib/placeholder-data.ts`). These are general movement photos, not tied to dated events. Real captions and album groupings are still needed.
 - [ ] **Dated event details** — `/events` is back to a neutral placeholder ("Event N", "Details coming soon"); needs real titles, dates, locations, and past/upcoming status, plus its own photos once available
 - [ ] **Photos** cleared for use (culture, people, more events)

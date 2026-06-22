@@ -276,12 +276,12 @@ export default function HomePage() {
       <section className="bg-surface-muted">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <Reveal>
-            <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-              Programs
-            </span>
-            <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-              What We Do
-            </h2>
+            <SectionHeading
+              eyebrow="Programs"
+              title="What We Do"
+              href="/programs"
+              linkLabel="View all programs"
+            />
           </Reveal>
           <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROGRAMS.map((program) => (
