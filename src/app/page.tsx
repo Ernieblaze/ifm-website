@@ -24,6 +24,7 @@ import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { HeroMark } from "@/components/HeroMark";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LeadershipSection } from "@/components/LeadershipSection";
+import { JoinCtaBand } from "@/components/JoinCtaBand";
 import {
   NEWS_ITEMS,
   ARTICLE_ITEMS,
@@ -113,7 +114,7 @@ export default function HomePage() {
                   <Link href="/about">Learn About the Movement</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <Link href="/history">Explore Our History</Link>
+                  <Link href="/history">Read Our Story</Link>
                 </Button>
               </div>
             </Reveal>
@@ -370,24 +371,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. History teaser */}
+      {/* 9. Our Story teaser */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
           <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-            Our History
+            Our Story
           </span>
           <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Origins of the <span className="no-break">Iwhuruohna</span> people
+            Founded in Port Harcourt, built to last
           </h2>
           <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-            Akalaka, the seven sons, the Benin links, and the Ikwerre Essa
-            form the origin narrative that makes us a distinct people.
+            Our story begins in Port Harcourt on the 10th of November 2018,
+            built around one promise, to protect the{" "}
+            <span className="no-break">Iwhuruohna</span> woman, man and
+            child.
           </p>
           <Link
             href="/history"
             className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green transition-colors hover:text-accent-green"
           >
-            Read our history →
+            Read our story →
           </Link>
         </Reveal>
       </section>
@@ -442,24 +445,7 @@ export default function HomePage() {
       </section>
 
       {/* 11. Join / register CTA band */}
-      <section className="bg-brand-green text-cream">
-        <div className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
-          <Reveal>
-            <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-              <span className="no-break">Iwhuruohna</span> FIRST.
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-cream/80">
-              Add your voice to a movement of over{" "}
-              {STATS.members.toLocaleString()}.
-            </p>
-            <div className="mt-8 flex flex-col items-center gap-3">
-              <Button asChild size="lg" variant="destructive">
-                <Link href="/join">Join the Movement</Link>
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <JoinCtaBand />
 
       {/* 12. Gallery teaser */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">

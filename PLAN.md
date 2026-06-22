@@ -16,7 +16,7 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 4. **Amplify voices** — let members share their own stories.
 5. **Project globally** — a polished face that makes IFM stand out beyond Rivers State.
 
-**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs, Leadership, and Join CTA (see `src/app/page.tsx` and `src/app/about/page.tsx`). News, Articles, Events, and History remain Phase 1 placeholders; Gallery has real photos but placeholder captions — see §12.
+**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs, Leadership, Join CTA, and the Our Story intro and founding milestone (see `src/app/page.tsx`, `src/app/about/page.tsx`, and `src/app/history/page.tsx`). News, Articles, and Events remain Phase 1 placeholders; Our Story has three placeholder milestones pending confirmed details; Gallery has real photos but placeholder captions — see §12.
 
 ---
 
@@ -89,7 +89,7 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 |---|---|---|
 | **Home** | Full multi-section page, real copy locked in: Hero (leader portrait) → About → Mission → Core Values (6) → Stats band → What We Do (4 programs) → Leadership → News preview → Articles preview → History teaser → Events preview → Join CTA → Gallery teaser | 1 |
 | **About / The Movement** | Mission, "Iwhuruohna First" philosophy, rejection of political tokenism, industrialization vision, leadership | 1 |
-| **Our History** | Flagship: origin narrative (Akalaka, the seven sons, Benin links), Ikwerre Essa, language, culture, distinct-identity position | 1 |
+| **Our Story** (`/history`, nav labeled "Our Story") | Real, confirmed copy: founding in Port Harcourt on 10 November 2018, the movement's purpose, and a data-driven vertical timeline (`milestones` array in `src/app/history/page.tsx`). Only the founding entry is real; three placeholder milestone slots (visually muted, dashed) are waiting on confirmed dates and details from group records, not invented. Ends with the shared `JoinCtaBand`. | 1 |
 | **News & Updates** | List of movement announcements (placeholder content in Phase 1; list + individual post pages once admin-published in Phase 2) | 1 (static) → 2 (dynamic) |
 | **Articles** | Longer-form editorial pieces on history, culture, and philosophy (placeholder content in Phase 1; list + individual article pages once dynamic) | 1 (static) → 2 (dynamic) |
 | **Events** | Upcoming + past events, auto-sorted. Neutral placeholder ("Event N", "Details coming soon"); no photos here, this section is for dated events only once real titles/dates/locations/status are confirmed. | 1 (static) → 2 (dynamic) |
@@ -198,6 +198,7 @@ Tables (snake_case). Use Row Level Security (RLS).
 - **framer-motion** for scroll-reveal (`Reveal`, `Stagger`/`StaggerItem`), hover/press elevation on cards and buttons, the one quiet hero float, and route transitions (`PageTransition`) — fast (200–500ms), ease-out, no bounce.
 - **lucide-react** for all icons.
 - **sonner** for toast feedback on forms.
+- `JoinCtaBand` (`src/components/JoinCtaBand.tsx`) is the single source of truth for the green "Iwhuruohna FIRST." closing CTA band; reused on the homepage and Our Story rather than duplicated. New pages that want a closing CTA should reuse it too.
 
 **Motion conventions (locked, `src/components/motion/`):**
 - `Reveal` — single-block fade/slide-in, triggers once via `whileInView`.
@@ -270,7 +271,8 @@ Add the same variables in **Vercel → Project → Settings → Environment Vari
 - [x] **Logo** — official crest (`public/images/logo.png`, transparent PNG) is in use in the Navbar, Footer, and as the site favicon (`src/app/icon.png`, a 512×512 padded square crop generated from the source crest so it isn't squished in browser tabs)
 - [ ] Iwhuruohna **flag** image — still needed to finalize/confirm the color palette (current palette is a placeholder direction, not yet flag-derived)
 - [x] **Mission statement** + "Who We Are" / About copy — real, approved copy is live on the homepage and About page (see §1)
-- [ ] **History** content for the flagship page (rough notes are fine)
+- [x] **Our Story intro and founding milestone** — real copy live on `/history` (founding in Port Harcourt, 10 November 2018, the movement's purpose, Unity Loyalty Duty)
+- [ ] **Three more confirmed milestones** for the Our Story timeline (`milestones` array in `src/app/history/page.tsx`); currently dashed, muted placeholder slots, no invented dates or claims
 - [x] **Gallery photos** — six images live at `public/images/gallery-1.jpg` to `gallery-6.jpg`, shown on `/gallery` and the homepage Gallery teaser (`src/lib/placeholder-data.ts`). These are general movement photos, not tied to dated events. Real captions and album groupings are still needed.
 - [ ] **Dated event details** — `/events` is back to a neutral placeholder ("Event N", "Details coming soon"); needs real titles, dates, locations, and past/upcoming status, plus its own photos once available
 - [ ] **Photos** cleared for use (culture, people, more events)
