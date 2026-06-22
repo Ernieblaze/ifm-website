@@ -5,16 +5,18 @@ import type { Leader } from "@/lib/leaders-data";
 export function LeaderCard({ leader }: { leader: Leader }) {
   return (
     <Card className="flex flex-col items-center text-center sm:flex-row sm:items-start sm:text-left">
-      <div className="relative h-32 w-32 shrink-0 sm:h-36 sm:w-36">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 scale-125 rounded-full bg-gradient-to-br from-brand-green/50 via-brand-green/20 to-transparent blur-xl"
-        />
+      <div
+        className="relative h-[160px] w-[160px] shrink-0 rounded-full p-[10%] sm:h-[180px] sm:w-[180px]"
+        style={{
+          background:
+            "radial-gradient(circle at center, #0A6B37 0%, rgba(10,107,55,0.45) 35%, rgba(10,107,55,0) 70%)",
+        }}
+      >
         <Image
           src={leader.photo}
           alt={leader.photoAlt}
           fill
-          sizes="144px"
+          sizes="180px"
           className="object-contain drop-shadow-[0_12px_20px_rgba(10,107,55,0.4)] [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]"
         />
       </div>

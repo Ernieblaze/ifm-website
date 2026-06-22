@@ -11,7 +11,7 @@ export const LEADERS: Leader[] = [
   {
     name: "Emeka Ihruoha",
     title: "IFM Supreme Leader",
-    photo: "/images/leader.png",
+    photo: "/images/leader-v2.png",
     photoAlt: "Portrait of Emeka Ihruoha, IFM Supreme Leader",
   },
 ];

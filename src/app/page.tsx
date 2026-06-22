@@ -119,16 +119,18 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={0.15} className="self-center lg:shrink-0 lg:self-auto">
-              <div className="relative h-56 w-56 sm:h-64 sm:w-64 lg:h-80 lg:w-80">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 scale-125 rounded-full bg-gradient-to-br from-brand-green/60 via-brand-green/25 to-transparent blur-2xl"
-                />
+              <div
+                className="relative mx-auto h-[280px] w-[280px] rounded-full p-[10%] sm:h-[320px] sm:w-[320px] lg:h-[400px] lg:w-[400px]"
+                style={{
+                  background:
+                    "radial-gradient(circle at center, #0A6B37 0%, rgba(10,107,55,0.45) 35%, rgba(10,107,55,0) 70%)",
+                }}
+              >
                 <Image
                   src={LEADERS[0].photo}
                   alt={LEADERS[0].photoAlt}
                   fill
-                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 256px, 224px"
+                  sizes="(min-width: 1024px) 400px, (min-width: 640px) 320px, 280px"
                   className="object-contain drop-shadow-[0_20px_35px_rgba(10,107,55,0.45)] [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
                   priority
                 />
