@@ -20,18 +20,13 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { Counter } from "@/components/motion/Counter";
 import { PatternDivider } from "@/components/PatternDivider";
-import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { HeroMark } from "@/components/HeroMark";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LeadershipSection } from "@/components/LeadershipSection";
 import { JoinCtaBand } from "@/components/JoinCtaBand";
-import {
-  NEWS_ITEMS,
-  ARTICLE_ITEMS,
-  EVENT_ITEMS,
-  GALLERY_ITEMS,
-  STATS,
-} from "@/lib/placeholder-data";
+import { SampleBadge } from "@/components/SampleBadge";
+import { GALLERY_ITEMS, STATS } from "@/lib/placeholder-data";
+import { news, articles, events } from "@/data/content";
 import { LEADERS } from "@/lib/leaders-data";
 import { cn } from "@/lib/utils";
 
@@ -319,14 +314,16 @@ export default function HomePage() {
           />
         </Reveal>
         <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {NEWS_ITEMS.slice(0, 3).map((item) => (
-            <StaggerItem key={item.slug}>
-              <Card className="h-full">
-                <PlaceholderImage label={item.category} icon={Newspaper} className="mb-4" />
-                <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-                  {item.category}
-                </span>
-                <h3 className="mt-2 font-heading text-lg font-semibold text-foreground">
+          {news.slice(0, 3).map((item) => (
+            <StaggerItem key={item.id}>
+              <Card className={cn("h-full", item.isSample && "border-dashed opacity-80")}>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                    <Newspaper className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  {item.isSample && <SampleBadge />}
+                </div>
+                <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -346,23 +343,29 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="From the editorial desk"
               title="Featured Articles"
-              href="/articles"
+              href="/news"
               linkLabel="View all articles"
             />
           </Reveal>
           <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {ARTICLE_ITEMS.slice(0, 3).map((item) => (
-              <StaggerItem key={item.slug}>
-                <Card className="h-full">
-                  <PlaceholderImage label="Article" icon={BookOpenText} className="mb-4" />
-                  <h3 className="font-heading text-lg font-semibold text-foreground">
+            {articles.slice(0, 3).map((item) => (
+              <StaggerItem key={item.id}>
+                <Card className={cn("h-full", item.isSample && "border-dashed opacity-80")}>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                      <BookOpenText className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    {item.isSample && <SampleBadge />}
+                  </div>
+                  <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {item.excerpt}
                   </p>
                   <p className="mt-4 text-xs text-muted-foreground">
-                    {item.author}, {item.readTime}
+                    {item.author ? `${item.author}, ` : ""}
+                    {formatDate(item.date)}
                   </p>
                 </Card>
               </StaggerItem>
@@ -401,46 +404,37 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Save the date"
             title="Upcoming Events"
-            href="/events"
+            href="/news"
             linkLabel="View all events"
           />
         </Reveal>
         <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {EVENT_ITEMS.slice(0, 3).map((item, index) => {
-            const label = item.title ?? `Event ${index + 1}`;
-            return (
-              <StaggerItem key={item.slug}>
-                <Card className="h-full">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
-                    <CalendarDays className="h-5 w-5" aria-hidden="true" />
-                  </span>
+          {events
+            .filter((item) => item.status === "upcoming")
+            .slice(0, 3)
+            .map((item) => (
+              <StaggerItem key={item.id}>
+                <Card className={cn("h-full", item.isSample && "border-dashed opacity-80")}>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                      <CalendarDays className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    {item.isSample && <SampleBadge />}
+                  </div>
                   <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
-                    {label}
+                    {item.title}
                   </h3>
-                  {item.date || item.location ? (
-                    <>
-                      {item.date && (
-                        <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
-                          <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
-                          {formatDate(item.date)}
-                        </p>
-                      )}
-                      {item.location && (
-                        <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                          <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                          {item.location}
-                        </p>
-                      )}
-                    </>
-                  ) : (
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Details coming soon.
-                    </p>
-                  )}
+                  <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
+                    {formatDate(item.date)}
+                  </p>
+                  <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                    {item.location}
+                  </p>
                 </Card>
               </StaggerItem>
-            );
-          })}
+            ))}
         </Stagger>
       </section>
 

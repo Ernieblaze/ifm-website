@@ -16,7 +16,7 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 4. **Amplify voices** — let members share their own stories.
 5. **Project globally** — a polished face that makes IFM stand out beyond Rivers State.
 
-**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs (homepage and the full `/programs` page), Leadership, Join CTA, and the Our Story intro and founding milestone (see `src/app/page.tsx`, `src/app/about/page.tsx`, `src/app/programs/page.tsx`, and `src/app/history/page.tsx`). News, Articles, and Events remain Phase 1 placeholders; Our Story has three placeholder milestones pending confirmed details; the Programs page is missing event dates and photos for its programs; Gallery has real photos but placeholder captions — see §12.
+**Real, approved copy is locked in** for the Hero, About, Mission, Core Values, Stats band, "What We Do" programs (homepage and the full `/programs` page), Leadership, Join CTA, and the Our Story intro and founding milestone (see `src/app/page.tsx`, `src/app/about/page.tsx`, `src/app/programs/page.tsx`, and `src/app/history/page.tsx`). The News and Events hub (`/news`) is entirely sample placeholder content for now; Our Story has three placeholder milestones pending confirmed details; the Programs page is missing event dates and photos for its programs; Gallery has real photos but placeholder captions — see §12.
 
 ---
 
@@ -61,11 +61,8 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 │   │   ├── page.tsx                 # Home (multi-section, see §5)
 │   │   ├── about/page.tsx
 │   │   ├── history/page.tsx
-│   │   ├── news/page.tsx
-│   │   ├── news/[slug]/page.tsx
-│   │   ├── articles/page.tsx
-│   │   ├── articles/[slug]/page.tsx
-│   │   ├── events/page.tsx
+│   │   ├── programs/page.tsx
+│   │   ├── news/page.tsx             # combined News, Articles, and Events hub
 │   │   ├── join/page.tsx             # member registration
 │   │   ├── stories/page.tsx
 │   │   ├── stories/submit/page.tsx
@@ -74,10 +71,12 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 │   │   └── admin/                   # login-protected (phase 2)
 │   │       ├── login/page.tsx
 │   │       └── dashboard/page.tsx
-│   ├── /components           # Navbar, Footer, SectionHeading, Card, ui/, etc.
+│   ├── /components           # Navbar, Footer, SectionHeading, Card, JoinCtaBand, SampleBadge, ui/, etc.
+│   ├── /data
+│   │   └── content.ts        # News/Articles/Events Phase 2 Supabase seam — TODO(supabase)
 │   ├── /lib
 │   │   ├── supabase.ts       # Supabase client(s) (phase 2)
-│   │   └── placeholder-data.ts  # Phase 1 News/Articles/Events/stats — TODO(supabase)
+│   │   └── placeholder-data.ts  # Gallery + Stats only (News/Articles/Events moved to src/data/content.ts)
 │   └── /styles
 ```
 
@@ -91,9 +90,7 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 | **About / The Movement** | Mission, "Iwhuruohna First" philosophy, rejection of political tokenism, industrialization vision, leadership | 1 |
 | **Programs** (`/programs`) | Full detail on the five confirmed programs (`programs` array in `src/app/programs/page.tsx`): Cultural Revival and Miss IFM, Student Debates, School Outreach, Women and Girl Child Empowerment, Industrialization Agenda. Real, confirmed copy throughout, no invented dates, locations, or numbers. The homepage's abbreviated "What We Do" section links here via "View all programs." Ends with the shared `JoinCtaBand`. Event dates and photos for these programs are still pending. | 1 |
 | **Our Story** (`/history`, nav labeled "Our Story") | Real, confirmed copy: founding in Port Harcourt on 10 November 2018, the movement's purpose, and a data-driven vertical timeline (`milestones` array in `src/app/history/page.tsx`). Only the founding entry is real; three placeholder milestone slots (visually muted, dashed) are waiting on confirmed dates and details from group records, not invented. Ends with the shared `JoinCtaBand`. | 1 |
-| **News & Updates** | List of movement announcements (placeholder content in Phase 1; list + individual post pages once admin-published in Phase 2) | 1 (static) → 2 (dynamic) |
-| **Articles** | Longer-form editorial pieces on history, culture, and philosophy (placeholder content in Phase 1; list + individual article pages once dynamic) | 1 (static) → 2 (dynamic) |
-| **Events** | Upcoming + past events, auto-sorted. Neutral placeholder ("Event N", "Details coming soon"); no photos here, this section is for dated events only once real titles/dates/locations/status are confirmed. | 1 (static) → 2 (dynamic) |
+| **News and Events** (`/news`, nav labeled "News") | Combined hub for Latest News, Articles, and Upcoming and Past Events, in that order on one page. Data-driven from `src/data/content.ts` (the Phase 2 Supabase seam), every entry currently sample placeholder content flagged `isSample: true` and rendered with a dashed border and a "Sample" badge so nothing fake reads as real. Replaces the former separate `/articles` and `/events` pages, which are retired. Ends with the shared `JoinCtaBand`. | 1 (static) → 2 (dynamic) |
 | **Join / Register** | Public member registration form; shows a live member count once wired to Supabase | 1 (static form) → 2 (persisted + live count) |
 | **Contact** | Form + social links (Facebook, Instagram, YouTube) | 1 |
 | **Stories / Voices** | Member-submitted stories (admin-approved before publishing) + submission form | 2 |
@@ -107,9 +104,8 @@ A professional, mobile-first website for the **Iwhuruohna FIRST Movement (IFM)**
 **Public (mostly static / read-only):**
 - Fast, mobile-first pages with strong cultural imagery.
 - Rich homepage: mission strip, About teaser, live-style member stats, News/Articles/Events previews, Join CTA, gallery teaser.
-- News feed that updates instantly when admin publishes (no redeploy) — Phase 1 ships with placeholder content.
-- Articles (long-form editorial) list + individual pages — Phase 1 ships with placeholder content.
-- Event listings (upcoming vs. past) — Phase 1 ships with placeholder content.
+- News, Articles, and Events combined on one `/news` hub, reading from `src/data/content.ts` — Phase 1 ships with sample placeholder content (`isSample: true`, "Sample" badge); Phase 2 swaps that file for live Supabase queries and the admin publishes without a redeploy.
+- Events on the hub separate Upcoming from Past visually once both exist.
 - Public member registration (`/join`) with a displayed member count — Phase 1 form is client-only; Phase 2 persists to Supabase and the count goes live.
 - Story submission form → enters admin approval queue.
 - Media gallery with albums; homepage carries a teaser grid until real photography lands.
@@ -199,7 +195,9 @@ Tables (snake_case). Use Row Level Security (RLS).
 - **framer-motion** for scroll-reveal (`Reveal`, `Stagger`/`StaggerItem`), hover/press elevation on cards and buttons, the one quiet hero float, and route transitions (`PageTransition`) — fast (200–500ms), ease-out, no bounce.
 - **lucide-react** for all icons.
 - **sonner** for toast feedback on forms.
-- `JoinCtaBand` (`src/components/JoinCtaBand.tsx`) is the single source of truth for the green "Iwhuruohna FIRST." closing CTA band; reused on the homepage and Our Story rather than duplicated. New pages that want a closing CTA should reuse it too.
+- `JoinCtaBand` (`src/components/JoinCtaBand.tsx`) is the single source of truth for the green "Iwhuruohna FIRST." closing CTA band; reused on the homepage, Our Story, Programs, and the News and Events hub rather than duplicated. New pages that want a closing CTA should reuse it too.
+- `SampleBadge` (`src/components/SampleBadge.tsx`) marks any card backed by sample data (`isSample: true` in `src/data/content.ts`) with a small dashed "Sample" pill, paired with a dashed card border and reduced opacity. Same visual language as the Our Story timeline's placeholder slots, used on the News and Events hub and its homepage previews.
+- `src/data/content.ts` is the dedicated Phase 2 Supabase seam for News, Articles, and Events (distinct from `src/lib/placeholder-data.ts`, which now only holds Gallery and Stats). Keep this file as the single place those three content types are defined.
 
 **Motion conventions (locked, `src/components/motion/`):**
 - `Reveal` — single-block fade/slide-in, triggers once via `whileInView`.
@@ -232,7 +230,7 @@ Tables (snake_case). Use Row Level Security (RLS).
 **Phase 2 — Backend + admin**
 6. Create Supabase project; add tables (incl. `articles`, `members`), RLS, storage bucket; wire env vars.
 7. Build admin login + dashboard.
-8. Convert News, Articles, and Events to dynamic (read from Supabase); replace `placeholder-data.ts`.
+8. Convert News, Articles, and Events to dynamic (read from Supabase); replace `src/data/content.ts`.
 9. Persist `/join` registrations to `members`; show a live member count on the homepage stats band.
 10. Build Stories page + submission form + approval flow.
 
@@ -277,7 +275,7 @@ Add the same variables in **Vercel → Project → Settings → Environment Vari
 - [x] **Programs detail page** — `/programs` live with the five confirmed programs (`src/app/programs/page.tsx`)
 - [ ] **Program event dates and photos** — each program on `/programs` (Cultural Revival and Miss IFM, Student Debates, School Outreach, Women and Girl Child Empowerment, Industrialization Agenda) still needs specific event dates and cleared photos
 - [x] **Gallery photos** — six images live at `public/images/gallery-1.jpg` to `gallery-6.jpg`, shown on `/gallery` and the homepage Gallery teaser (`src/lib/placeholder-data.ts`). These are general movement photos, not tied to dated events. Real captions and album groupings are still needed.
-- [ ] **Dated event details** — `/events` is back to a neutral placeholder ("Event N", "Details coming soon"); needs real titles, dates, locations, and past/upcoming status, plus its own photos once available
+- [ ] **Real News, Articles, and Events content** — `/news` is a working hub built entirely from sample placeholders (`src/data/content.ts`, every entry `isSample: true`); needs real titles, excerpts, dates, locations, and past/upcoming status, plus photos, before launch
 - [ ] **Photos** cleared for use (culture, people, more events)
 - [x] **Leadership** — first leader live: Emeka Ihruoha, IFM Supreme Leader (`public/images/leader.png`, a transparent-background cutout; `src/lib/leaders-data.ts`). Shown in the Home hero, a homepage Leadership section, and reused inside the About page's Leadership tab via `LeadershipSection`/`LeaderCard`. Each leader has a placeholder for a short message/quote until supplied — more leaders can be added by extending the `LEADERS` array.
 - [ ] **Social links** (Facebook page, Instagram, YouTube)
